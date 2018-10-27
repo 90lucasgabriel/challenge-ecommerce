@@ -10,15 +10,16 @@ Portanto, dê o seu melhor!
 
 ![Layout](assets/preview.jpg)
 
-
 ## Instruções
 - Os arquivos do layout estão no diretório assets deste repositório
-- O conteúdo não é estático. Você deve criar um JavaScript que faça a consilta dos dados das categorias/menu e produtos das categorias que serão fornecidos por uma API (instruções abaixo).
+- O conteúdo não é estático. Você deve criar um JavaScript para consultar a lista de categorias a serem exibidas no menu e também para exibir os produtos das categorias.  
+Os dados serão fornecidos por uma API. As instruções estão mais abaixo.
 - Fonte padrão: "Open Sans"
 - Fonte do menu e botão de busca: "Open Sans - Extrabold"
 - As imagens dos produtos estão no diretório public/media
 - Você pode utilizar as tecnologias e bibliotecas que achar melhor (frameworks ou bibliotecas JS / CSS)
-- Crie uma documentação de como rodar o seu projeto
+- Crie uma documentação simples comentando sobre as tecnologias e soluções adotadas
+- Se necessário explique também como rodar o seu projeto
 
 ## Requisitos
 - Design responsivo nos breakpoints 320px, 768px, 1024px e 1440px
@@ -48,7 +49,7 @@ Portanto, dê o seu melhor!
 - Instale as dependências
 ```
 npm install
-````
+```
 - Rode a aplicação
 ```
 npm start
@@ -76,7 +77,6 @@ O endpoint de categoria deve ser utilizado para montar o menu do cabeçalho.
   ]
 }
 ```
-
 
 - Produtos da Categoria: http://localhost:8888/api/V1/categories/{id}  
 O endpoint de produtos da categoria deve ser consumido para listar os produtos da categoria quando o usuário clicar em um dos menus.
