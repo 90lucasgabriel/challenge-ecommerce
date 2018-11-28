@@ -1,6 +1,5 @@
 var app = require('connect')()
 var serveStatic = require('serve-static')
-var open = require('open')
 
 // Serve up mock-api folder
 app.use('/api', serveStatic('mock-api', {
@@ -19,5 +18,3 @@ app.use('/', serveStatic('public', {'index': ['index.html', 'index.htm']}))
 app.listen(8888, function() {
     console.log('Acesse: http://localhost:8888')
 });
-
-open('http://localhost:8888')
