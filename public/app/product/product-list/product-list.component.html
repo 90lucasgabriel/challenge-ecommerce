@@ -1,0 +1,55 @@
+<div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-sm="column">
+  <div fxFlex="20" class="padding">
+    <mat-card>
+      <mat-card-content>
+        <p class="special-price primary">FILTRE POR</p>
+        <mat-action-list>
+          <span class="title accent">CATEGORIAS</span>
+          <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
+        </mat-action-list>
+        <mat-action-list *ngFor="let f of filterList | keyvalue">
+          <span class="accent">{{ f.value }}</span>
+          <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
+        </mat-action-list>
+        <mat-action-list>
+          <span class="accent">TIPOS</span>
+          <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
+        </mat-action-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex>
+
+    <div class="padding">
+      <p class="title primary mat-h1">{{ pageTitle }}</p>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start start">
+      <div *ngFor="let p of productList" fxFlex="25" fxFlex.lt-md="33" fxFlex.lt-sm="50" class="padding">
+      <mat-card class="product" [routerLink] = "['/', 'product','category', category.id, p.id]">
+          <div mat-card-image style="overflow: hidden; height: 250px">
+            <img mat-card-image src="assets/{{p.image}}" alt="Photo">
+          </div>
+          <mat-card-content>
+            <p>{{ p.name | uppercase}}</p>
+            <p>
+              <span [ngClass]="!p.specialPrice ? 'special-price primary' : 'price'">{{ p.price | currency:'BRL'}}</span> 
+              <span class="special-price primary" *ngIf="p.specialPrice">{{ p.specialPrice  | currency:'BRL'}}</span>
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-stroked-button color="accent" fxFlex>COMPRAR</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+    <div fxLayoutAlign="center center" class="padding">
+      <button mat-stroked-button color="accent" (click)="queryByCategory(category.id,2)">Mais Produtos</button>
+    </div>
+
+    <div> </div>
+
+  </div>
+</div>

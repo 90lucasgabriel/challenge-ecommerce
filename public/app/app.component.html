@@ -1,21 +1,103 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-progress-bar style="position: absolute; top: 0; z-index: 4" #progressBar *ngIf="progressBarVisible" 
+color="accent" mode="indeterminate"></mat-progress-bar>
 
-<router-outlet></router-outlet>
+<div class="container mat-typography">
+
+  <!-- HEADER START -->
+  <div fxLayout="row" fxLayoutAlign="center start" class="header">
+    <div fxLayout="column" fxFlex="80" fxFlex.lt-lg="100" fxLayoutGap="25px">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+          <!-- LEFT SECTION -->
+          <div>LOGO</div>
+
+          <!-- RIGHT SECTION START -->
+          <div>
+            <div fxLayoutAlign="center center">
+              <button mat-icon-button color="primary" [matMenuTriggerFor]="theme" matTooltip="Temas"><mat-icon>format_color_fill</mat-icon></button>
+              <mat-menu #theme="matMenu" xPosition="before" yPosition="below">
+                <button mat-menu-item *ngFor="let theme of themeList" (click)="selectTheme(theme.value)">{{theme.label}}</button>
+              </mat-menu> 
+              
+              <mat-form-field appearance="outline" class="no-padding">
+                <mat-label>Pesquisar</mat-label>
+                <input matInput type="text" #q (keyup.enter)="submitSearch(q.value)">
+                <button mat-button *ngIf="q.value" matSuffix mat-icon-button aria-label="Clear" (click)="q.value=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+              <button mat-flat-button color="primary" style="height: 49px" matTooltip="Pesquisar" (click)="submitSearch(q.value)">
+                Buscar
+              </button>
+            </div>
+          </div>
+          <!-- RIGHT SECTION END -->
+
+        </div>
+    </div>
+  </div>
+  <!-- HEADER END -->
+
+  <!-- TOOLBAR START -->
+  <mat-toolbar color="primary"  fxLayout="row" fxLayoutAlign="center start">
+
+      
+        <div fxLayout="column" fxFlex="80" fxFlex.lt-lg="100" fxLayoutGap="25px">
+          <div fxLayout="row" fxLayoutAlign="space-between center" style="height: 64px">
+        
+            <button mat-icon-button 
+              matTooltip    = "Menu" 
+              (click)       = "sidenav.toggle()" 
+              fxHide.gt-xs  = "true">
+              <mat-icon>menu</mat-icon>
+            </button>
+
+            <button mat-button fxFlex fxFlexFill
+              fxLayoutAlign = "center center"
+              fxHide.lt-sm  = "true"
+              *ngFor        = "let m of menus"
+              [routerLink]  = "m.link">
+              {{ m.name }}
+            </button>
+            
+              
+
+          </div>
+        </div>
+
+  </mat-toolbar>
+  <!-- TOOLBAR END -->
+
+  <!-- SIDENAV START -->
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over" fxHide.gt-xs="true">
+        <div fxHide.gt-md="true" fxLayout="column" class="padding" style="background:rgba(0,0,0,0.5); color: white">
+        <div fxLayout="row" fxLayoutAlign="center center" style="width:45px; height: 45px; border-radius: 100%; padding: 10px; background:darkslategray; border: 2px solid white; margin-bottom: 10px">U</div>
+        <div>Nome do usuário</div>
+        <div>emaildousuario@email.com.br</div>
+      </div>
+      <mat-nav-list>
+        <mat-list>
+          <mat-list-item *ngFor="let menu of menus" class="button-menu" (click)="closeSideNav()" routerLink='{{menu.link}}'>
+            <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>
+            <h4 mat-line>{{menu.name}}</h4>
+          </mat-list-item>
+        </mat-list>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- CONTENT START -->
+    <mat-sidenav-content>
+      <!-- LAYOUT START -->
+      <div fxLayout="row" fxLayoutAlign="center start" class="mat-typography">
+        <div fxLayout="column" fxFlex="80" fxFlex.lt-lg="100" fxLayoutGap="25px">
+          <router-outlet (activate)='onActivate($event)'></router-outlet>
+        </div>
+      </div>
+      <!-- LAYOUT END -->
+    </mat-sidenav-content>
+    <!-- CONTENT END -->
+    
+  </mat-sidenav-container>
+  <!-- SIDENAV END -->
+
+</div>

@@ -24,10 +24,13 @@
             "tsConfig": "public/tsconfig.app.json",
             "assets": [
               "public/favicon.ico",
-              "public/assets"
+              "public/assets",
+              "public/mock-api"
             ],
             "styles": [
-              "public/styles.scss"
+              "public/styles.scss",
+              "public/themes/dark-theme.scss",
+              "public/themes/light-theme.scss"
             ],
             "scripts": []
           },
@@ -83,7 +86,9 @@
             "tsConfig": "public/tsconfig.spec.json",
             "karmaConfig": "public/karma.conf.js",
             "styles": [
-              "public/styles.scss"
+              "public/styles.scss",
+              "public/themes/dark-theme.scss",
+              "public/themes/light-theme.scss"
             ],
             "scripts": [],
             "assets": [

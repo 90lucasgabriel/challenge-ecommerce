@@ -1,1 +1,86 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@include mat-core();
+.light-theme {
+  @import './themes/light-theme.scss';
+  @include angular-material-theme($light-theme);
+}
+.dark-theme {
+  @import './themes/dark-theme.scss';
+  @include angular-material-theme($dark-theme);
+}
+
+
+
+/* COMMON -------------------------------------------- */
+body {
+  margin:         0;
+  overflow:       hidden;
+}
+
+* {
+  font-family:    'Roboto', sans-serif;
+}
+
+p {    
+  line-height:    25px;
+}
+
+.margin {
+  margin:         10px !important;
+}
+
+.padding {
+  padding:        10px !important;
+}
+
+.transparent {
+  background:     transparent !important;
+}
+
+.full-width {
+  min-width:      100%;
+  max-width:      100%;
+}
+
+
+.mat-drawer-inner-container {  
+  overflow:        hidden !important;
+}
+
+.mat-drawer-inner-container:hover {  
+  overflow-y:      auto !important;
+}
+
+.no-padding, .no-padding .mat-form-field-wrapper{
+  padding:          0;
+}
+
+mat-toolbar {
+  height:           64px !important;
+}
+
+mat-card.product mat-card-content {
+  text-align:       center;
+}
+
+.price {
+  text-decoration:  line-through
+}
+
+.special-price, title {
+  font-size:        20px;
+  font-weight:      bold;
+}
+
+ul {
+  padding-left:     20px;
+}
+
+li {
+  line-height:      30px;
+}
+
+mat-action-list {
+  margin-bottom:    20px;
+}

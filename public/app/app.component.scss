@@ -1,0 +1,84 @@
+/*.mat-tab-nav-bar {
+  position:       fixed;
+  left:           0;
+  width:          100%;
+  z-index:        2;
+}
+
+.main-content {  
+  margin-top:     56px;
+  max-height:     calc(100vh - 56px);
+  min-height:     calc(100vh - 56px);
+  overflow-y:     auto;
+  margin-bottom:  56px;
+  overflow-x:     hidden;
+  max-width:      100wh;
+}
+*/
+
+mat-sidenav mat-list-item h4, 
+mat-sidenav mat-list-item mat-icon{
+  /*color:            #666;*/
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 0px;
+}
+
+mat-sidenav-content {
+  overflow-x: hidden;
+}
+
+/*.is-mobile .toolbar {
+  position: fixed;
+   Make sure the toolbar will stay on top of the content as it scrolls past. 
+  z-index: 2;
+}*/
+
+h1.app-name {
+  margin-left: 8px;
+}
+
+.sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+  /*.is-mobile .sidenav-container {
+ When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. 
+  flex: 1 0 auto;
+}*/
+
+mat-sidenav{
+  width:              220px;
+}
+
+.is-mobile mat-sidenav{
+  width:              300px;
+}
+
+mat-sidenav, .mat-drawer-inner-container {  
+  overflow-y:         hidden;
+}
+
+.is-mobile mat-sidenav,
+mat-sidenav:hover{
+  overflow-y:         auto !important;
+}
+
+.mat-drawer-side {
+  border-right:       none !important;
+}
+
+.header {
+  height:             80px;
+  /*background:         white;*/
+}

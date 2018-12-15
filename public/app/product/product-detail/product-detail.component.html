@@ -1,0 +1,46 @@
+<div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-sm="column">
+  <div fxFlex="20" class="padding">
+    <mat-card>
+      <mat-card-content>
+        <p class="special-price primary">FILTRE POR</p>
+        <mat-action-list>
+          <span class="title accent">CATEGORIAS</span>
+          <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
+        </mat-action-list>
+        <mat-action-list *ngFor="let f of filterList | keyvalue">
+          <span class="accent">{{ f.value }}</span>
+          <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
+        </mat-action-list>
+        <mat-action-list>
+          <span class="accent">TIPOS</span>
+          <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
+        </mat-action-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex>
+
+    <div class="padding">
+      
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start" fxLayoutAlign.lt-sm="center center" fxLayoutGap="15px">
+      <div fxFlex>
+        <img src="assets/{{item.image}}" alt="Photo" class="full-width">
+      </div>
+      <div fxFlex>
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+          <p class="title primary mat-h1">{{ item.name | uppercase}}</p>
+          
+          <span [ngClass]="!item.specialPrice ? 'special-price primary' : 'price'">{{ item.price | currency:'BRL'}}</span> 
+          <span class="special-price primary" *ngIf="item.specialPrice">{{ item.specialPrice  | currency:'BRL'}}</span>
+          <button mat-stroked-button color="accent">COMPRAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div> </div>
+  
+</div>
