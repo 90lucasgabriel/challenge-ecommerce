@@ -1,27 +1,36 @@
-# Angular
+# Assessment Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
+This is an [Angular 7](http://angular.io/) + [Angular Material](https://material.angular.io/) application. 
 
-## Development server
+## Video Preview
+https://youtu.be/k8WCRcIbtpE
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Prerequisites
+Make sure you have [Node 6.9.0 or higher, together with NPM 3 or higher](https://nodejs.org/en/) installed.
 
-## Code scaffolding
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
+```
+npm install -g @angular/cli
+```
+## Installing
+- Clone this repo:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+git clone git@bitbucket.org:90lucasgabriel/assessment-frontend.git
+```
+- Access directory:
+```
+cd assessment-frontend
+```
+- Install dependencies:
+```
+npm install
+```
+## Running
+- Run the app:
+```
+npm start
+```
+Head to http://localhost:4200 in your browser and you'll see the app running.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+The app will automatically reload if you change any of the source files.
