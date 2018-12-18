@@ -1,3 +1,8 @@
+$layout-breakpoint-xs:     320px !default;
+$layout-breakpoint-sm:     768px !default;
+$layout-breakpoint-md:     1024px !default;
+$layout-breakpoint-lg:     1440px !default;
+
 @import '~@angular/material/theming';
 
 @include mat-core();
@@ -64,6 +69,10 @@ mat-card.product mat-card-content {
   text-align:       center;
 }
 
+div.mat-card-image {
+  overflow:         hidden;
+}
+
 .price {
   text-decoration:  line-through
 }
@@ -84,3 +93,6 @@ li {
 mat-action-list {
   margin-bottom:    20px;
 }
+
+
+

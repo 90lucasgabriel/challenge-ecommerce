@@ -11,6 +11,8 @@ import { ProductDetailComponent }     from './product-detail/product-detail.comp
 const productRoutes: Routes = [
   { path: '',                                 redirectTo: 'product',                pathMatch: 'full' },
   { path: 'product',                          component: ProductListComponent,      pathMatch: 'full' },
+  { path: 'product/:id',                      component: ProductDetailComponent,    pathMatch: 'full' },
+  { path: 'product/q/:q',                     component: ProductListComponent,      pathMatch: 'full' },
   { path: 'product/category/:categoryId',     component: ProductListComponent,      pathMatch: 'full' },
   { path: 'product/category/:categoryId/:id', component: ProductDetailComponent,    pathMatch: 'full' },
 ];

@@ -17,6 +17,7 @@
   import { AppComponent }               from './app.component';
   import { CategoryModule }             from './category/category.module';
   import { ProductModule }              from './product/product.module';
+  import { ContactModule }              from './contact/contact.module';
 
 
 
@@ -32,7 +33,8 @@ imports: [
   MaterialModule,
 
   CategoryModule,
-  ProductModule
+  ProductModule,
+  ContactModule
 ],
 providers: [
   LoaderService,

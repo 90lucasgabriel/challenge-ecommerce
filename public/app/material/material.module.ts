@@ -1,5 +1,6 @@
 import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
+import { MaterialService }    from './material.service';
 
 import {
   MatAutocompleteModule,
@@ -86,6 +87,7 @@ import { FlexLayoutModule }           from '@angular/flex-layout';
     FlexLayoutModule
   ],
   declarations: [ ],
-  entryComponents: [ ]
+  entryComponents: [ ],
+  providers: [ MaterialService ]
 })
 export class MaterialModule { }

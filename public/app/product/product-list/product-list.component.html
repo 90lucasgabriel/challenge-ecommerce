@@ -7,10 +7,6 @@
           <span class="title accent">CATEGORIAS</span>
           <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
         </mat-action-list>
-        <mat-action-list *ngFor="let f of filterList | keyvalue">
-          <span class="accent">{{ f.value }}</span>
-          <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
-        </mat-action-list>
         <mat-action-list>
           <span class="accent">TIPOS</span>
           <button  mat-list-item *ngFor="let c of categoryList" [routerLink]  = "['/', 'product','category', c.id]"> {{ c.name}} </button>
@@ -23,30 +19,55 @@
 
     <div class="padding">
       <p class="title primary mat-h1">{{ pageTitle }}</p>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-icon-button>
+            <mat-icon matTooltip="Grade" (click)="isGridView(true)">view_module</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon matTooltip="Lista" (click)="isGridView(false)">view_list</mat-icon>
+          </button>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="Ordernar por:" (selectionChange)="orderBy($event)">
+              <mat-option value="price01">Preço menor-maior</mat-option>
+              <mat-option value="price10">Preço maior-menor</mat-option>
+              <mat-option value="nameAz">Nome A-Z</mat-option>
+              <mat-option value="nameZa">Nome Z-A</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
     </div>
 
-    <div fxLayout="row wrap" fxLayoutAlign="start start">
-      <div *ngFor="let p of productList" fxFlex="25" fxFlex.lt-md="33" fxFlex.lt-sm="50" class="padding">
-      <mat-card class="product" [routerLink] = "['/', 'product','category', category.id, p.id]">
-          <div mat-card-image style="overflow: hidden; height: 250px">
-            <img mat-card-image src="assets/{{p.image}}" alt="Photo">
-          </div>
-          <mat-card-content>
-            <p>{{ p.name | uppercase}}</p>
-            <p>
-              <span [ngClass]="!p.specialPrice ? 'special-price primary' : 'price'">{{ p.price | currency:'BRL'}}</span> 
-              <span class="special-price primary" *ngIf="p.specialPrice">{{ p.specialPrice  | currency:'BRL'}}</span>
-            </p>
+    <div [fxLayout]="gridView?'row wrap':'column'" fxLayoutAlign="start start">
+      <div *ngFor="let p of productList" [ngClass]="gridView?'':'full-width'" fxFlex="25" fxFlex.lt-md="33" fxFlex.lt-sm="50" class="padding">
+        <mat-card class="product" [routerLink] = "['/', 'product', p.id]">
+          <mat-card-content [fxLayout]="!gridView?'row':'column'" fxLayoutGap="10px">
+            <div mat-card-image [fxFlex]="gridView?'false':'25'" [ngStyle]="{'height': gridView?'230px': '160px'}">
+              <img mat-card-image src="assets/{{p.image}}" alt="Photo">
+            </div>
+            <div fxFlex>
+              <div fxLayout="column" fxFlexFill fxLayoutAlign="center center">
+                <p>{{ p.name | uppercase }}</p>
+                <p>
+                  <span [ngClass]="!p.specialPrice ? 'special-price primary' : 'price'">{{ p.price | currency:'BRL'}}</span> 
+                  <span class="special-price primary" *ngIf="p.specialPrice">{{ p.specialPrice  | currency:'BRL'}}</span>
+                </p>
+                <div class="full-width">
+                  <button mat-stroked-button color="accent" fxFlex>COMPRAR</button>
+                </div>
+              </div>
+            </div>
           </mat-card-content>
-          <mat-card-actions>
-            <button mat-stroked-button color="accent" fxFlex>COMPRAR</button>
-          </mat-card-actions>
         </mat-card>
       </div>
     </div>
 
     <div fxLayoutAlign="center center" class="padding">
-      <button mat-stroked-button color="accent" (click)="queryByCategory(category.id,2)">Mais Produtos</button>
+      <button mat-stroked-button color="accent" (click)="query(2)">Mais Produtos</button>
     </div>
 
     <div> </div>

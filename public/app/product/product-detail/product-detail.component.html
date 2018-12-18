@@ -35,7 +35,7 @@
           
           <span [ngClass]="!item.specialPrice ? 'special-price primary' : 'price'">{{ item.price | currency:'BRL'}}</span> 
           <span class="special-price primary" *ngIf="item.specialPrice">{{ item.specialPrice  | currency:'BRL'}}</span>
-          <button mat-stroked-button color="accent">COMPRAR</button>
+          <button mat-stroked-button color="accent" (click)="addToCart(item)">COMPRAR</button>
         </div>
       </div>
     </div>

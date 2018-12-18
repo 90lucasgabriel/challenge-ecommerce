@@ -6,7 +6,7 @@
 
   // CONFIG --------------------------
   import { AppConfig }                  from '../app.config';
-import { map, mergeMap, combineAll} from 'rxjs/operators';
+import { map, mergeMap, combineAll, mapTo} from 'rxjs/operators';
 import { combineLatest, concat } from 'rxjs';
 import { ApiResponse } from '../common/model/api-response.model';
 import { Product } from './product.model';
@@ -24,30 +24,46 @@ export class ProductService {
 
 // METHODS -------------------------------------------------------
   /**
-   * GET Search List
+   * GET product list
   */
-  public query(page?: number) {
+  public query(page: number, categoryId?: number) {
     let result = [];
-    let categoryId = 1;
 
-    for (let i = 1; i < 4; i++) {
+    if (!categoryId) {
+      for (let i = 1; i < 4; i++) {
+        result = result.concat(
+          this.http.get(`${this.url}categories/${i}`).pipe(
+            mergeMap( (p: ApiResponse) => {
+              return p.items;
+            })
+          ));
+      }
+    } else {
       result = result.concat(
-        this.http.get(`${this.url}categories/${i}`).pipe(
+        this.http.get(`${this.url}categories/${categoryId}`).pipe(
           mergeMap( (p: ApiResponse) => {
             return p.items;
           })
         ));
     }
-    console.log(result.join());
-    //result = combineAll(result.join());
-    return result;
 
+    return merge(result);
   }
 
+  /**
+   * Get product list by category
+   * @param categoryId 
+   * @param page 
+   */
   public queryByCategory(categoryId: number, page?: number): Observable<any> {
     return this.http.get(`${this.url}categories/${categoryId}`);
   }
 
+  /**
+   * Get product item by Id's
+   * @param categoryId
+   * @param id 
+   */
   public get(categoryId: number, id: number): Observable<Product> {
     return this.queryByCategory(categoryId, id).pipe(
       map( (c: ApiResponse) => {

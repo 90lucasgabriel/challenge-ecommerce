@@ -1,12 +1,15 @@
 // IMPORTS -----------------------------------------------------
-  import { Component, ChangeDetectorRef, OnInit, AfterViewInit, ViewChild }                from '@angular/core';
+  // ANGULAR --------------------------
+  import { Component, OnInit, ViewChild }  from '@angular/core';
   import { Router }                   from '@angular/router';
-  import { AppConfig }                from './app.config';
+  import { MatSidenav }               from '@angular/material';
+  import { Menu }                     from './common/model/menu.model';
+  import { map }                      from 'rxjs/operators';
 
+  // SERVICE --------------------------
   import { LoaderService }            from './common/services/loader.service';
-  import { MediaMatcher } from '@angular/cdk/layout';
-  import { MatSidenav } from '@angular/material';
-  import { CategoryService } from './category/category.service';
+  import { CategoryService }          from './category/category.service';
+  import { AppConfig }                from './app.config';
 
 
 
@@ -16,29 +19,23 @@
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.scss' ]
   })
-  export class AppComponent implements OnInit, AfterViewInit   {
+  export class AppComponent implements OnInit   {
 // DECLARATIONS -------------------------------------------------
   public progressBarVisible:  boolean = false;
-  public showSearch:          boolean = false;
+  public hideSearch:          boolean = false;
   public name:                string  = 'Angular';
   public background:          string  = '';
   public themeList:           any     = AppConfig.THEME_LIST;
   public apiPath:             string  = AppConfig.API_PATH;
-  public menus:               any;
-
-  mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
+  public menus:               Array<Menu>;
+  private categoryList:       any;
   @ViewChild('sidenav') sidenav: MatSidenav;
 
 
 
 
   // METHODS ------------------------------------------------------
-    private start(): void {
-      this.categoryService.query().subscribe(c => {
-        
-      });
-    }
+    private start(): void { }
 
 
 
@@ -55,42 +52,52 @@
       .subscribe(isLoading => {
         this.progressBarVisible = isLoading;
       });
+  }
 
+  /**
+   * Execute after load
+   */
+  public ngOnInit() {
     this.startProperties();
     this.start();
-  }
+   }
 
   /**
    * Initialize properties
    */
   private startProperties(): void {
+    // Convert categories into menu object format
+    this.categoryList = this.categoryService.query().pipe(
+      map( c => {
+        return c.items.map( i => {
+          return {
+            name: i.name,
+            icon: 'label',
+            link: `product/category/${i.id}`
+          };
+        });
+
+      })
+    );
+
     this.menus       = [{
       name: 'Página Inicial',
-      icon: '',
+      icon: 'home',
       link: ``
-    }, {
-      name: 'Camisetas',
-      icon: '',
-      link: `product/category/1`
-    }, {
-      name: 'Calças',
-      icon: '',
-      link: `product/category/2`
-    }, {
-      name: 'Sapatos',
-      icon: '',
-      link: `product/category/3`
-    }, {
-      name: 'Contato',
-      icon: '',
-      link: `contact`
     }];
+
+    // Add all categories to main menu
+    this.categoryList.subscribe( c => {
+      this.menus = this.menus.concat(c);
+      this.menus.push({
+        name: 'Contato',
+        icon: 'mail',
+        link: `contact`
+      });
+    });
   }
 
-  public onActivate(event) {
-    // document.getElementById('main-content').scrollTo(0, 0);
-  }
-
+  // LAYOUT ---------------
   public toggleBackground() {
     this.background = this.background ? '' : 'primary';
   }
@@ -101,24 +108,12 @@
   }
 
   public toggleSearch(): boolean {
-    this.showSearch = !this.showSearch;
-    return this.showSearch;
+    this.hideSearch = !this.hideSearch;
+    return this.hideSearch;
   }
 
   public submitSearch(q: string) {
-    this.router.navigate(['/video', 'list', q]);
-  }
-
-  /**
-   * Execute after load
-   */
-  public ngOnInit() { }
-
-  /**
-   * Execute after load all components
-   */
-  public ngAfterViewInit() {
-    // this.location.go('company/1/branch');
+    this.router.navigate(['/product/q', q]);
   }
 
   public closeSideNav() {

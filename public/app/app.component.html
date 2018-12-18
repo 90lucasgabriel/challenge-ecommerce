@@ -6,9 +6,20 @@ color="accent" mode="indeterminate"></mat-progress-bar>
   <!-- HEADER START -->
   <div fxLayout="row" fxLayoutAlign="center start" class="header">
     <div fxLayout="column" fxFlex="80" fxFlex.lt-lg="100" fxLayoutGap="25px">
-        <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="header padding">
           <!-- LEFT SECTION -->
-          <div>LOGO</div>
+          <div fxLayoutAlign="center center">
+            <button mat-icon-button 
+              matTooltip    = "Menu" 
+              (click)       = "sidenav.toggle()" 
+              fxHide.gt-xs  = "true">
+              <mat-icon>menu</mat-icon>
+            </button>
+
+            <span [fxHide.lt-md]="hideSearch">
+              <img src="../assets/logo.png" />
+            </span>
+          </div>
 
           <!-- RIGHT SECTION START -->
           <div>
@@ -16,17 +27,21 @@ color="accent" mode="indeterminate"></mat-progress-bar>
               <button mat-icon-button color="primary" [matMenuTriggerFor]="theme" matTooltip="Temas"><mat-icon>format_color_fill</mat-icon></button>
               <mat-menu #theme="matMenu" xPosition="before" yPosition="below">
                 <button mat-menu-item *ngFor="let theme of themeList" (click)="selectTheme(theme.value)">{{theme.label}}</button>
-              </mat-menu> 
+              </mat-menu>
               
-              <mat-form-field appearance="outline" class="no-padding">
+              <mat-form-field appearance="outline" class="no-padding" [fxHide.lt-sm]="!hideSearch">
                 <mat-label>Pesquisar</mat-label>
                 <input matInput type="text" #q (keyup.enter)="submitSearch(q.value)">
                 <button mat-button *ngIf="q.value" matSuffix mat-icon-button aria-label="Clear" (click)="q.value=''">
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-form-field>
-              <button mat-flat-button color="primary" style="height: 49px" matTooltip="Pesquisar" (click)="submitSearch(q.value)">
+              <button mat-flat-button color="primary" style="height: 49px" matTooltip="Pesquisar" (click)="submitSearch(q.value)" [fxHide.lt-sm]="!hideSearch">
                 Buscar
+              </button>
+
+              <button mat-icon-button (click)="toggleSearch()" fxHide.gt-xs="true">
+                <mat-icon color="primary">search</mat-icon>
               </button>
             </div>
           </div>
@@ -38,22 +53,16 @@ color="accent" mode="indeterminate"></mat-progress-bar>
   <!-- HEADER END -->
 
   <!-- TOOLBAR START -->
-  <mat-toolbar color="primary"  fxLayout="row" fxLayoutAlign="center start">
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center start" fxHide.lt-sm  = "true">
 
       
         <div fxLayout="column" fxFlex="80" fxFlex.lt-lg="100" fxLayoutGap="25px">
           <div fxLayout="row" fxLayoutAlign="space-between center" style="height: 64px">
         
-            <button mat-icon-button 
-              matTooltip    = "Menu" 
-              (click)       = "sidenav.toggle()" 
-              fxHide.gt-xs  = "true">
-              <mat-icon>menu</mat-icon>
-            </button>
+            
 
             <button mat-button fxFlex fxFlexFill
               fxLayoutAlign = "center center"
-              fxHide.lt-sm  = "true"
               *ngFor        = "let m of menus"
               [routerLink]  = "m.link">
               {{ m.name }}
