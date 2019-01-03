@@ -1,4 +1,4 @@
-# Desafio Ecommerce
+# Challenge Ecommerce
 
 This is an [Angular 7](http://angular.io/) + [Angular Material](https://material.angular.io/) application. 
 
@@ -16,11 +16,11 @@ npm install -g @angular/cli
 - Clone this repo:
 
 ```
-git clone git@github.com:90lucasgabriel/desafio-ecommerce.git
+git clone git@github.com:90lucasgabriel/challenge-ecommerce.git
 ```
 - Access directory:
 ```
-cd desafio-ecommerce
+cd challenge-ecommerce
 ```
 - Install dependencies:
 ```
