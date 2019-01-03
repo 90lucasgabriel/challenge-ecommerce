@@ -1,4 +1,4 @@
-# Assessment Frontend
+# Desafio Ecommerce
 
 This is an [Angular 7](http://angular.io/) + [Angular Material](https://material.angular.io/) application. 
 
@@ -16,11 +16,11 @@ npm install -g @angular/cli
 - Clone this repo:
 
 ```
-git clone git@bitbucket.org:90lucasgabriel/assessment-frontend.git
+git clone git@github.com:90lucasgabriel/desafio-ecommerce.git
 ```
 - Access directory:
 ```
-cd assessment-frontend
+cd desafio-ecommerce
 ```
 - Install dependencies:
 ```
